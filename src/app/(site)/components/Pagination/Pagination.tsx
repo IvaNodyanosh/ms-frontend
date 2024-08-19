@@ -9,7 +9,7 @@ export default function Pagination({
   setPagePagination: React.Dispatch<
     React.SetStateAction<{
       currentPage: number;
-      maxPage: number;
+      allItems: number;
     }>
   >;
 

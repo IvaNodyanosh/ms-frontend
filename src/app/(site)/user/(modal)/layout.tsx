@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useUserContext } from "@/app/hooks/userHooks";
 import { OrdersContext } from "@/app/contexts/OrderContext";
 import { useState, useEffect } from "react";
-import { getOrders } from "../../_api/getOrders";
 import { redirect } from "next/navigation";
 
 export default function OrderLayout({
@@ -16,10 +15,8 @@ export default function OrderLayout({
   children: React.ReactNode;
 }>): React.ReactNode {
   const { user } = useUserContext();
-  const [orders, setOrders] = useState<[]>([]);
 
   useEffect(() => {
-    getOrders(setOrders);
     if (!user.token) {
       redirect("/");
     }
