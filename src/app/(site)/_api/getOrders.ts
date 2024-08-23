@@ -10,7 +10,7 @@ export async function getOrders(
       currentPage: number;
       allItems: number;
     }>
-  >;
+  >
 ) {
   const token = localStorage.getItem("token");
   const data = await fetch(

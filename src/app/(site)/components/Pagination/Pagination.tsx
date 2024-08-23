@@ -144,7 +144,6 @@ export default function Pagination({
         <li className={styles.item}>
           <button
             className={styles.button}
-            
             onClick={() => handlePageChange(currentPage + 3)}
           >
             {currentPage + 3}
