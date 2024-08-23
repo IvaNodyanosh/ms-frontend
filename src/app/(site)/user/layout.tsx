@@ -32,10 +32,7 @@ export default function Users({
   const { currentPage, allItems } = pagePagination;
 
   useEffect(() => {
-    getOrders(setOrders, setPagePagination, currentPage);
-    if (!user.token) {
-      redirect("/");
-    }
+    getOrders(setOrders, currentPage, setPagePagination);
   }, [pagePagination.currentPage]);
 
   const maxPage = Math.ceil(allItems / 5);
