@@ -18,7 +18,7 @@ export function OrdersList({
 
   return (
     <>
-      {orders.length > 0 ? (
+      {orders && orders.length > 0 ? (
         <ul className={styles.list}>
           {orders.map((order) => (
             <li className={styles.item} key={order._id}>

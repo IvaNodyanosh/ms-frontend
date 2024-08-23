@@ -1,9 +1,16 @@
+import React from "react";
+
 const backendLink = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function getOrders(
   setOrders: Function,
   currentPage: number,
-  setPagePagination: Function
+  setPagePagination: React.Dispatch<
+    React.SetStateAction<{
+      currentPage: number;
+      allItems: number;
+    }>
+  >;
 ) {
   const token = localStorage.getItem("token");
   const data = await fetch(
