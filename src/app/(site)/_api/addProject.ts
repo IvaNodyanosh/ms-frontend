@@ -1,15 +1,15 @@
 const backendLink = process.env.NEXT_PUBLIC_BACKEND_URL;
+const orderId = process.env.NEXT_PUBLIC_OWNER_ORDER_ID;
 
-export async function addReview(
+export async function addProject(
   token: string,
-  orderId: string,
   comment: string,
   files: File[],
   setLoading: Function
 ) {
   const formData = new FormData();
   formData.append("comment", comment);
-  formData.append("orderId", orderId);
+  formData.append("orderId", `${orderId}`);
 
   for (let i = 0; i < files.length; i++) {
     formData.append("files", files[i]);

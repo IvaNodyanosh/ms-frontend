@@ -4,22 +4,18 @@ import styles from "./layout.module.scss";
 import React from "react";
 import Link from "next/link";
 
-import { useUserContext } from "@/app/hooks/userHooks";
-import { useEffect } from "react";
-import { redirect } from "next/navigation";
+// import { useUserContext } from "@/app/hooks/userHooks";
+// import { useEffect } from "react";
+// import { redirect } from "next/navigation";
 
 export default function OrderLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>): React.ReactNode {
-  const { user } = useUserContext();
+  // const { user } = useUserContext();
 
-  useEffect(() => {
-    if (!user.token) {
-      redirect("/");
-    }
-  }, []);
+
 
   return (
     <section>

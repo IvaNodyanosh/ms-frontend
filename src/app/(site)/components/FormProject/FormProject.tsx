@@ -1,17 +1,13 @@
-import styles from "./FormCreateOrder.module.scss";
-import { createOrder, registerOrder } from "../../_api/orders";
+import styles from "./FormProject.module.scss";
 import { useState, ChangeEvent } from "react";
+import { addProject } from "../../_api/addProject";
 
-export function FormCreateOrder({
+export function FormProject({
   value,
 }: {
   value: { setLoading: Function; user: { token: string } };
 }) {
   const { setLoading, user } = value;
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [files, setFiles] = useState<File[] | []>([]);
   return (
@@ -20,74 +16,13 @@ export function FormCreateOrder({
       onSubmit={(e) => {
         e.preventDefault();
         setLoading("load");
-        user.token !== ""
-          ? registerOrder(user.token, message, files, setLoading)
-          : createOrder(
-              name,
-              surname,
-              email,
-              phone,
-              message,
-              files,
-              setLoading
-            );
+        addProject(user.token, message, files, setLoading);
       }}
     >
-      <h2 className={styles.header}>Zaregistrujte svou objednávku!</h2>
-      {user.token === "" && (
-        <>
-          <label className={styles.label}>
-            <span>Jméno</span>
-            <input
-              type="text"
-              required
-              value={name}
-              onChange={({ target }) => setName(target.value)}
-            />
-            <svg className={styles.icon}>
-              <use href="symbol-defs.svg#user" />
-            </svg>
-          </label>
-          <label className={styles.label}>
-            <span>Příjmení</span>
-            <input
-              type="text"
-              required
-              value={surname}
-              onChange={({ target }) => setSurname(target.value)}
-            />
-            <svg className={styles.icon}>
-              <use href="symbol-defs.svg#user" />
-            </svg>
-          </label>
-          <label className={styles.label}>
-            <span>Telefonní číslo</span>
-            <input
-              type="tel"
-              required
-              value={phone}
-              onChange={({ target }) => setPhone(target.value)}
-            />
-            <svg className={styles.icon}>
-              <use href="symbol-defs.svg#phone" />
-            </svg>
-          </label>
-          <label className={styles.label}>
-            <span> Email</span>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={({ target }) => setEmail(target.value)}
-            />
-            <svg className={styles.icon}>
-              <use href="symbol-defs.svg#email" />
-            </svg>
-          </label>
-        </>
-      )}
+      <h2 className={styles.header}>Přidat nový projekt!</h2>
+
       <label className={styles.label}>
-        <span>Zpráva</span>
+        <span>Popis projektu</span>
         <textarea
           name=""
           onChange={({ target }) => setMessage(target.value)}
@@ -99,7 +34,7 @@ export function FormCreateOrder({
       </label>
       <label className={styles.cloud}>
         <svg>
-          <use href="../../../../../symbol-defs.svg#cloud" />
+          <use href="../../../../../symbol-defs.svg#add" />
         </svg>
         <input
           name="files[]"
@@ -114,7 +49,7 @@ export function FormCreateOrder({
               // Преобразування FileList в масив
               const newFiles = Array.from(files);
 
-              setFiles((prevState: File[] | [])=> {
+              setFiles((prevState: File[] | []) => {
                 // Фільтруємо файли, щоб уникнути дублікатів
                 const existingFiles = prevState.map((file) => file.name);
                 const uniqueFiles = newFiles.filter(

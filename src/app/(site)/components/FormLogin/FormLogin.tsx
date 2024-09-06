@@ -40,8 +40,9 @@ export function FormLogin({ setLoading }: { setLoading: Function }) {
         <label className={styles.label}>
           <span>Heslo</span>
           <input
-            type="text"
+            type="password"
             required
+
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />

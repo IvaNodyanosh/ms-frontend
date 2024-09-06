@@ -1,0 +1,130 @@
+.header {
+  margin-bottom: 35px;
+}
+
+.list {
+  & img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  border-top: 1px solid rgb(147, 147, 147);
+
+  padding-top: 35px;
+  margin-bottom: 30px;
+}
+
+.item:not(:last-of-type) {
+  margin-bottom: 25px;
+}
+
+.form {
+  margin-bottom: 40px;
+  display: flex;
+
+  .label {
+    position: relative;
+  }
+
+  .input {
+    background-color: var(--background-color);
+
+    font-family: "Roboto";
+    font-size: 16px;
+    padding: 10px 10px 10px 40px;
+
+    height: 40px;
+
+    color: var(--secondary-text-color);
+
+    border-radius: 10px;
+
+    width: 210px;
+
+    border: 1px solid var(--primary-text-color);
+
+    &:hover,
+    &:focus {
+      border-color: var(--secondary-text-color);
+
+      & + .icon {
+        fill: var(--secondary-text-color);
+      }
+    }
+  }
+
+  &__button {
+    color: var(--primary-text-color);
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    border: 1px solid var(--primary-text-color);
+
+    font-size: 16px;
+    line-height: 1.25;
+    font-family: "Dela Gothic One", sans-serif;
+    font-weight: 400;
+
+    &:hover,
+    &:focus {
+      background-color: var(--secondary-text-color);
+      color: var(--background-color);
+      border-color: var(--secondary-text-color);
+    }
+  }
+}
+
+.icon {
+  fill: var(--primary-text-color);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+  transition: fill 0.3s cubic-bezier(0.57, 0.2, 1, 1.15);
+}
+
+@media screen and (min-width: 900px) {
+  .header {
+    margin-bottom: 45px;
+  }
+
+  .list {
+    columns: 2;
+    margin-bottom: 40px;
+    gap: 30px;
+  }
+
+  .form {
+    .input {
+      width: 400px;
+    }
+
+    &__button {
+      font-size: 17px;
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .header {
+    margin-bottom: 50px;
+  }
+
+  .list {
+    margin-bottom: 40px;
+    gap: 40px;
+  }
+
+  .form {
+    .input {
+      width: 600px;
+
+      &__button {
+        font-size: 17px;
+      }
+    }
+  }
+}

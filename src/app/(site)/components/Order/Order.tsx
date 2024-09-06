@@ -53,10 +53,11 @@ export function Order({
 
   return (
     <>
+      
       {orderItem ? (
         <div>
           <ul>
-            {user.statusUser === "owner" && customer.name === "" && (
+            {(user.statusUser === "owner" && customer.name !== "") && (
               <li className={styles.item}>
                 <h2 className={styles.header}>ZÁKAZNIK:</h2>
                 <p>{customer.name + " " + customer.surname}</p>

@@ -1,6 +1,6 @@
 import styles from "./SuccessMessage.module.scss";
 
-export function SuccessMessage({ type }: {type: string}) {
+export function SuccessMessage({ type }: { type: string }) {
   switch (type) {
     case "order-create":
       return (
@@ -44,6 +44,18 @@ export function SuccessMessage({ type }: {type: string}) {
       return (
         <div className={styles.box}>
           <p className={styles.text}>Stav objednávky byl uspěšně změněn.</p>
+        </div>
+      );
+    case "add__project":
+      return (
+        <div className={styles.box}>
+          <p className={styles.text}>Projekt byl uspěšně přidán!</p>
+        </div>
+      );
+    case "add__reviews":
+      return (
+        <div className={styles.box}>
+          <p className={styles.text}>Zpětná vayba byla uspěšně přidána!</p>
         </div>
       );
   }

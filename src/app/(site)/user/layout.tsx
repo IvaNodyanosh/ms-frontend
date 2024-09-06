@@ -6,7 +6,6 @@ import { OrdersContext } from "@/app/contexts/OrderContext";
 import { useState, useEffect } from "react";
 import { getOrders } from "../_api/getOrders";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 import { OrdersList } from "../components/OrdersList/OrdersList";
 import Pagination from "../components/Pagination/Pagination";
@@ -24,9 +23,11 @@ export default function Users({
   const [pagePagination, setPagePagination] = useState<{
     currentPage: number;
     allItems: number;
+    filter: undefined | string;
   }>({
     currentPage: 1,
     allItems: 0,
+    filter: undefined,
   });
 
   const { currentPage, allItems } = pagePagination;
@@ -70,6 +71,22 @@ export default function Users({
           </div>
           <h3 className={styles.header_orders}>OBJEDNÁVKY</h3>
         </div>
+        {user.statusUser === "owner" ? (
+          <Link href="user/project" className={styles.add__link}>
+            <svg className={styles.add__icon}>
+              <use href="../../../../symbol-defs.svg#plus" />
+            </svg>
+            <span>Přidat nový projekt</span>
+          </Link>
+        ) : (
+          <Link href="user/order" className={styles.add__link}>
+            <svg className={styles.add__icon}>
+              <use href="../../../../symbol-defs.svg#plus" />
+            </svg>
+            <span>Přidat novou objednávku</span>
+          </Link>
+        )}
+
         <OrdersList orders={orders} />
 
         {maxPage > 1 && (

@@ -20,7 +20,7 @@ export default function FormReset({ value }: { value: { setLoading: Function, to
       <label className={styles.label}>
         <span>Heslo</span>
         <input
-          type="text"
+          type="password"
           required
           value={password}
           onChange={({ target }) => setPassword(target.value)}

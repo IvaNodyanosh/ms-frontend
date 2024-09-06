@@ -2,17 +2,18 @@
 
 import styles from "./page.module.scss";
 import { FormCreateOrder } from "@/app/(site)/components/FormCreateOrder/FormCreateOrder";
-import { useState } from "react";
+import { Loader } from "@/app/(site)/components/Loader/loader";
+import { SuccessMessage } from "@/app/(site)/components/SuccessMessage/SuccessMessage";
+import { ErrorMessage } from "@/app/(site)/components/ErrorMessage/ErrorMessage";
 
 import { useUserContext } from "@/app/hooks/userHooks";
 
-import { Loader } from "@/app/(site)/components/Loader/loader";
-import { ErrorMessage } from "@/app/(site)/components/ErrorMessage/ErrorMessage";
-import { SuccessMessage } from "@/app/(site)/components/SuccessMessage/SuccessMessage";
+import { useState } from "react";
 
-export default function Order() {
+export default function OrderPage() {
+  const [loading, setLoading] = useState<string>("unloaded");
   const { user } = useUserContext();
-  const [loading, setLoading] = useState("unloaded");
+
   switch (loading) {
     case "unloaded":
       return (
@@ -30,7 +31,7 @@ export default function Order() {
     case "loading":
       return (
         <div className={styles.box}>
-          <SuccessMessage type={"order-create"} />
+          <SuccessMessage type={"add__reviews"} />
         </div>
       );
     case "error":

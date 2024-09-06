@@ -5,6 +5,8 @@ import styles from "./FormReview.module.scss";
 
 import { addReview } from "../../_api/addReview";
 
+import { useUserContext } from "@/app/hooks/userHooks";
+
 export default function FormReview({
   value,
 }: {
@@ -14,6 +16,7 @@ export default function FormReview({
 
   const [comment, setComment] = useState("");
   const [files, setFiles] = useState<File[] | []>([]);
+   const { user } = useUserContext();
 
   return (
     <form
@@ -21,7 +24,7 @@ export default function FormReview({
       onSubmit={(e) => {
         e.preventDefault();
         setLoading("load");
-        addReview(orderId, comment, files, setLoading);
+        addReview(user.token, orderId, comment, files, setLoading);
       }}
     >
       <label className={styles.label}>

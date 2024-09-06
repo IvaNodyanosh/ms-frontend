@@ -2,10 +2,12 @@ import React from "react";
 
 const backendLink = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-export async function getOrders(
-  setOrders: Function,
+export async function getMedia(
+  type: "get" | "filter",
+  setMedia: Function,
   currentPage: number,
-  setPagePagination: React.Dispatch<
+  filter: string | undefined,
+  setPagination: React.Dispatch<
     React.SetStateAction<{
       currentPage: number;
       allItems: number;
@@ -13,13 +15,11 @@ export async function getOrders(
     }>
   >
 ) {
-  const token = localStorage.getItem("token");
   const data = await fetch(
-    `${backendLink}orders/?page=${currentPage}&pageSize=5`,
+    `${backendLink}reviews/media/?page=${currentPage}&pageSize=4&filter=${filter}`,
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
         Accept: "application/json",
         "Content-Type": "application/json; charset=utf-8",
       },
@@ -28,13 +28,22 @@ export async function getOrders(
     .then((res) => res.json())
     .then((data) => data)
     .catch((error) => console.error(error));
+
   console.log(data);
 
   if (data) {
-    setPagePagination((prevState) => ({
-      ...prevState,
-      allItems: data.totalItems,
-    }));
-    setOrders(data.orders);
+    setPagination((prevState) =>
+      type === "get"
+        ? {
+            ...prevState,
+            allItems: data.totalItems,
+          }
+        : {
+            ...prevState,
+            currentPage: 1,
+            allItems: data.totalItems,
+          }
+    );
+    setMedia(data.items);
   }
 }

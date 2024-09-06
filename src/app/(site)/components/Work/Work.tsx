@@ -10,14 +10,14 @@ export default function Work(): React.ReactNode {
           <li className={styles.item}>
             <h3 className={styles.item_header}>ODBORNÝ VÝKON PRÁCE</h3>
             <p>
-              Na každou zakázku dohlíží a od začátku do konce ji realiyuje pan
-              Štefánek, světoynámý mistr řemesel.
+              Na každou zakázku dohlíží a od začátku do konce ji realizuje pan
+              Štefánek, světoznámý mistr řemesel.
             </p>
           </li>
           <li className={styles.item}>
             <h3 className={styles.item_header}>MATERIÁLY NEJVYŠŠÍ KVALITY</h3>
             <p>
-              Pro každý projekt jsou vzbíránz tz nejlepší materiálz prémiové
+              Pro každý projekt jsou vybírány tz nejlepší materiálz prémiové
               kvality.
             </p>
           </li>

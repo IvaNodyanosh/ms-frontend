@@ -10,6 +10,7 @@ export default function Pagination({
     React.SetStateAction<{
       currentPage: number;
       allItems: number;
+      filter: string | undefined;
     }>
   >;
 
@@ -45,7 +46,7 @@ export default function Pagination({
         </li>
       )}
 
-      {currentPage > 5 && (
+      {(currentPage > 5 || (maxPage - currentPage > 5 && currentPage > 5)) && (
         <li className={styles.item__gap}>
           <span>...</span>
         </li>
@@ -140,7 +141,7 @@ export default function Pagination({
       )}
 
       {((currentPage + 3 < maxPage && maxPage - currentPage < 5) ||
-        (currentPage < 4 && currentPage + 3 < maxPage)) && (
+        (currentPage < 5 && currentPage + 3 < maxPage)) && (
         <li className={styles.item}>
           <button
             className={styles.button}
@@ -152,7 +153,7 @@ export default function Pagination({
       )}
 
       {((currentPage + 4 < maxPage && maxPage - currentPage < 5) ||
-        (currentPage < 3 && currentPage + 4 < maxPage)) && (
+        (currentPage < 4 && currentPage + 4 < maxPage)) && (
         <li className={styles.item}>
           <button
             className={styles.button}
@@ -164,7 +165,7 @@ export default function Pagination({
       )}
 
       {((currentPage + 5 < maxPage && maxPage - currentPage < 6) ||
-        (currentPage < 2 && currentPage + 5 < maxPage)) && (
+        (currentPage < 3 && currentPage + 5 < maxPage)) && (
         <li className={styles.item}>
           <button
             className={styles.button}
@@ -176,7 +177,7 @@ export default function Pagination({
       )}
 
       {((currentPage + 6 < maxPage && maxPage - currentPage < 6) ||
-        (currentPage < 1 && currentPage + 6 < maxPage)) && (
+        (currentPage < 2 && currentPage + 6 < maxPage)) && (
         <li className={styles.item}>
           <button
             className={styles.button}
@@ -187,7 +188,7 @@ export default function Pagination({
         </li>
       )}
 
-      {maxPage - currentPage > 4 && (
+      {maxPage - currentPage > 5  && (
         <li className={styles.item__gap}>
           <span>...</span>
         </li>
