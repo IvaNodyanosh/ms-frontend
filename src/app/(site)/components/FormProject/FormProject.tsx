@@ -31,7 +31,7 @@ export function FormProject({
           value={message}
         ></textarea>
         <svg className={styles.icon}>
-          <use href="symbol-defs.svg#mail" />
+          <use href="../../../../../symbol-defs.svg#mail" />
         </svg>
       </label>
       <label className={styles.cloud}>
@@ -69,7 +69,7 @@ export function FormProject({
         {files.map((file) => (
           <li className={styles.files_item} key={file.name}>
             <svg>
-              <use href="symbol-defs.svg#folder" />
+              <use href="../../../../../symbol-defs.svg#folder" />
             </svg>
             <p>{file.name}</p>
             <button
@@ -85,7 +85,7 @@ export function FormProject({
               }}
             >
               <svg>
-                <use href="symbol-defs.svg#cancel" />
+                <use href="../../../../../symbol-defs.svg#cancel" />
               </svg>
             </button>
           </li>
