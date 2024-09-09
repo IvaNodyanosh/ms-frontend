@@ -86,6 +86,12 @@
   transition: fill 0.3s cubic-bezier(0.57, 0.2, 1, 1.15);
 }
 
+.video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 @media screen and (min-width: 900px) {
   .header {
     margin-bottom: 45px;

@@ -33,7 +33,13 @@ export default function Gallery() {
           className={styles.form}
           onSubmit={(e) => {
             e.preventDefault();
-            getMedia("filter", setMedia, currentPage, filter, setPagination);
+            getMedia(
+              "filter",
+              setMedia,
+              currentPage,
+              filter?.toLocaleLowerCase(),
+              setPagination
+            );
           }}
         >
           <label className={styles.label}>

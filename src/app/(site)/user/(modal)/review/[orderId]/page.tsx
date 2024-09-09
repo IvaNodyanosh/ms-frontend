@@ -1,24 +1,30 @@
 "use client";
 
 import styles from "./page.module.scss";
-import { FormCreateOrder } from "@/app/(site)/components/FormCreateOrder/FormCreateOrder";
-import { useState } from "react";
 
-import { useUserContext } from "@/app/hooks/userHooks";
+import { useParams } from "next/navigation";
 
 import { Loader } from "@/app/(site)/components/Loader/loader";
-import { ErrorMessage } from "@/app/(site)/components/ErrorMessage/ErrorMessage";
 import { SuccessMessage } from "@/app/(site)/components/SuccessMessage/SuccessMessage";
+import { ErrorMessage } from "@/app/(site)/components/ErrorMessage/ErrorMessage";
+import FormReview from "@/app/(site)/components/FormReview/FormReview";
 
-export default function Order() {
-  const { user } = useUserContext();
-  const [loading, setLoading] = useState("unloaded");
-  const [progress, setProgress] = useState(0);
+import { useState } from "react";
+
+export default function OrderPage() {
+  const params = useParams();
+  const orderId = Array.isArray(params.orderId)
+    ? params.orderId[0]
+    : params.orderId || "";
+
+  const [loading, setLoading] = useState<string>("unloaded");
+  const [progress, setProgress] = useState<number>(0);
+
   switch (loading) {
     case "unloaded":
       return (
         <div className={styles.box}>
-          <FormCreateOrder value={{ setProgress, setLoading, user }} />
+          <FormReview value={{ setProgress, orderId, setLoading }} />
         </div>
       );
 
@@ -31,7 +37,7 @@ export default function Order() {
     case "loading":
       return (
         <div className={styles.box}>
-          <SuccessMessage type={"order-create"} />
+          <SuccessMessage type={"add__reviews"} />
         </div>
       );
     case "error":

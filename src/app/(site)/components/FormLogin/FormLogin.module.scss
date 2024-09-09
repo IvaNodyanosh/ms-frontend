@@ -3,13 +3,13 @@
   flex-direction: column;
 }
 .label {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: column;
   position: relative;
 
   &:last-of-type {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
   }
 
   & > span {
@@ -38,7 +38,7 @@
     &:focus {
       border: 2px solid var(--secondary-text-color);
 
-      & + svg {
+      & + .label_box > svg {
         fill: var(--secondary-text-color);
       }
     }
@@ -53,9 +53,9 @@
     display: flex;
 
     input:checked {
-     & + svg {
-      opacity: 1;
-     }
+      & + svg {
+        opacity: 1;
+      }
     }
 
     &:hover {
@@ -63,6 +63,21 @@
 
       & svg {
         fill: var(--secondary-text-color);
+      }
+    }
+  }
+}
+
+.input {
+  margin-bottom: 3px;
+  &:not(:placeholder-shown) {
+    &:valid {
+      border-color: var(--success-color);
+    }
+    &:invalid {
+      border-color: var(--error-color);
+      & + .label_box > .error_valid {
+        opacity: 1;
       }
     }
   }
@@ -98,76 +113,6 @@
   }
 }
 
-.cloud {
-  border: 1px solid var(--primary-text-color);
-  border-radius: 10px;
-  height: 120px;
-  & > svg {
-    display: block;
-    margin: 10px auto 0 auto;
-    width: 100px;
-    height: 70px;
-    fill: var(--primary-text-color);
-  }
-
-  &:hover,
-  &:focus {
-    border: 2px solid var(--secondary-text-color);
-
-    & > svg {
-      fill: var(--secondary-text-color);
-    }
-
-    & > span {
-      color: var(--secondary-text-color);
-    }
-  }
-
-  &_text {
-    font-family: "Roboto";
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-    margin-left: auto;
-  }
-}
-
-.files_list {
-  padding-top: 20px;
-}
-
-.files_item {
-  display: flex;
-  padding-left: 10px;
-
-  &:not(:last-of-type) {
-    margin-bottom: 5px;
-  }
-
-  & > p {
-    font-size: 18px;
-    padding-left: 3px;
-  }
-
-  & > svg {
-    width: 20px;
-    height: 20px;
-    fill: var(--primary-text-color);
-  }
-}
-
-.button_delete {
-  margin-left: auto;
-  width: 24px;
-  height: 24px;
-
-  & > svg {
-    height: 24px;
-    width: 24px;
-    fill: var(--primary-text-color);
-  }
-}
-
 .svg_unchecked {
   display: block;
   margin-right: 10px;
@@ -183,4 +128,20 @@
   fill: var(--primary-text-color);
   opacity: 0;
   position: absolute;
+}
+
+.error_valid {
+  color: var(--error-color);
+  opacity: 0;
+}
+
+.error_text {
+  color: var(--error-color);
+  margin: 0 0 15px 0;
+}
+
+.form_error {
+  & .label input {
+    border-color: var(--error-color);
+  }
 }

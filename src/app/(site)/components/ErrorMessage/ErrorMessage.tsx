@@ -10,7 +10,6 @@ export function ErrorMessage({ type }: { type: string }) {
             Dobrý den, omlouváme se, ale došlo k chybě. Zkuste to prosím později
             nebo nás kontaktujte na:
             <a href="mailto: ivanodyanosh@gmail.com"> ivanodyanosh@gmail.com</a>
-            .
           </p>
         </div>
       );
@@ -20,16 +19,19 @@ export function ErrorMessage({ type }: { type: string }) {
           <p>Dobrý den, tento e-mail je již na naši stránce zaregistrován!</p>
         </div>
       );
-    case "userNotFound":
-      return (
-        <div className={styles.box}>
-          <p>Omlouváme se, ale nepodařilo se nám najít váš účet.</p>
-        </div>
-      );
     case "userBlocked":
       return (
         <div className={styles.box}>
           <p>Omlouváme se, ale váš účet byl zablokován vlastníkem!</p>
+        </div>
+      );
+    case "notVerify":
+      return (
+        <div className={styles.box}>
+          <p>
+            Omlouváme se, ale váš email ne byl ověřen, přejděte na svuj e-mail a
+            ověřte ho!
+          </p>
         </div>
       );
   }

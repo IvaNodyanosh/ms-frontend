@@ -1,22 +1,24 @@
 import styles from "./FormProject.module.scss";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, use } from "react";
 import { addProject } from "../../_api/addProject";
 
 export function FormProject({
   value,
 }: {
-  value: { setLoading: Function; user: { token: string } };
+  value: {setProgress: Function, setLoading: Function; user: { token: string } };
 }) {
-  const { setLoading, user } = value;
+  const { setProgress, setLoading, user } = value;
   const [message, setMessage] = useState("");
   const [files, setFiles] = useState<File[] | []>([]);
+
+
   return (
     <form
       className={styles.form}
       onSubmit={(e) => {
         e.preventDefault();
         setLoading("load");
-        addProject(user.token, message, files, setLoading);
+        addProject(user.token, message, files, setLoading, setProgress);
       }}
     >
       <h2 className={styles.header}>Přidat nový projekt!</h2>
@@ -43,7 +45,7 @@ export function FormProject({
           multiple
           className="phantom"
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            const { files } = event.target;
+            const { files } = event.target; 
 
             if (files) {
               // Преобразування FileList в масив
@@ -58,9 +60,10 @@ export function FormProject({
                 return [...prevState, ...uniqueFiles];
               });
             }
+            
           }}
         />
-        <span className={styles.cloud_text}>Nahrát soubory (do 25 MB)</span>
+        <span className={styles.cloud_text}>Nahrát soubory</span>
       </label>
       <ul className={styles.files_list}>
         {files.map((file) => (

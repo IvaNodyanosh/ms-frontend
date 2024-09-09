@@ -13,10 +13,12 @@ export default function Order() {
   const [loading, setLoading] = useState("unloaded");
 
   switch (loading) {
+    case "wrongInfo":
+    case "userNotFound":
     case "unloaded":
       return (
         <div className={styles.box}>
-          <FormLogin setLoading={setLoading} />
+          <FormLogin value={{ loading, setLoading }} />
         </div>
       );
     case "success":

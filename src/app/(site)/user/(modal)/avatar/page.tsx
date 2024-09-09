@@ -13,18 +13,19 @@ import { SuccessMessage } from "@/app/(site)/components/SuccessMessage/SuccessMe
 export default function Avatar() {
   const { user, setUser } = useUserContext();
   const [loading, setLoading] = useState("unloaded");
+  const [progress, setProgress] = useState(0);
   switch (loading) {
     case "unloaded":
       return (
         <div className={styles.box}>
-          <AvatarForm value={{ setLoading, user, setUser }} />
+          <AvatarForm value={{ setProgress, setLoading, user, setUser }} />
         </div>
       );
 
     case "load":
       return (
         <div className={styles.box}>
-          <Loader />
+          <Loader progress={progress} />
         </div>
       );
     case "loading":

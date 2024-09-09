@@ -5,9 +5,13 @@ import { useState, ChangeEvent } from "react";
 export function FormCreateOrder({
   value,
 }: {
-  value: { setLoading: Function; user: { token: string } };
+  value: {
+    setProgress: Function;
+    setLoading: Function;
+    user: { token: string };
+  };
 }) {
-  const { setLoading, user } = value;
+  const { setProgress, setLoading, user } = value;
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
@@ -21,7 +25,7 @@ export function FormCreateOrder({
         e.preventDefault();
         setLoading("load");
         user.token !== ""
-          ? registerOrder(user.token, message, files, setLoading)
+          ? registerOrder(user.token, message, files, setLoading, setProgress)
           : createOrder(
               name,
               surname,
@@ -29,7 +33,8 @@ export function FormCreateOrder({
               phone,
               message,
               files,
-              setLoading
+              setLoading,
+              setProgress
             );
       }}
     >
@@ -114,7 +119,7 @@ export function FormCreateOrder({
               // Преобразування FileList в масив
               const newFiles = Array.from(files);
 
-              setFiles((prevState: File[] | [])=> {
+              setFiles((prevState: File[] | []) => {
                 // Фільтруємо файли, щоб уникнути дублікатів
                 const existingFiles = prevState.map((file) => file.name);
                 const uniqueFiles = newFiles.filter(

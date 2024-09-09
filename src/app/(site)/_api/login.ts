@@ -23,7 +23,10 @@ export async function login(
     body: JSON.stringify(body),
   })
     .then((res) => res.json())
-    .then((data) => data);
+      .then((data) => data);
+  
+      console.log(data);
+
 
   if (
     data.token &&

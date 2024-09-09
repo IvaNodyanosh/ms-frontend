@@ -8,8 +8,8 @@ import { useUserContext } from "@/app/hooks/userHooks";
 
 import { useContext, useState, useEffect } from "react";
 import { OrdersContext } from "@/app/contexts/OrderContext";
-import { UserContext } from "@/app/contexts/UserContext";
 import { changeStatusOrder } from "@/app/(site)/_api/changeStatusOrder";
+import Link from "next/link";
 
 interface Customer {
   name: string;
@@ -53,11 +53,10 @@ export function Order({
 
   return (
     <>
-      
       {orderItem ? (
         <div>
           <ul>
-            {(user.statusUser === "owner" && customer.name !== "") && (
+            {user.statusUser === "owner" && customer.name !== "" && (
               <li className={styles.item}>
                 <h2 className={styles.header}>ZÁKAZNIK:</h2>
                 <p>{customer.name + " " + customer.surname}</p>
@@ -110,12 +109,12 @@ export function Order({
               </button>
             )}
           {orderItem.status === "completed" && user.statusUser !== "owner" && (
-            <button
+            <Link
+              href={`/user/review/${orderId}`}
               className={styles.button_review}
-              onClick={() => setLoading("review")}
             >
               PŘIDAT RECENZI
-            </button>
+            </Link>
           )}
 
           {user.statusUser === "owner" && (

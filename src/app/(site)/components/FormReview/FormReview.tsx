@@ -10,13 +10,13 @@ import { useUserContext } from "@/app/hooks/userHooks";
 export default function FormReview({
   value,
 }: {
-  value: { setLoading: Function; orderId: string };
+  value: { setProgress: Function; setLoading: Function; orderId: string };
 }) {
-  const { setLoading, orderId } = value;
+  const { setProgress, setLoading, orderId } = value;
 
   const [comment, setComment] = useState("");
   const [files, setFiles] = useState<File[] | []>([]);
-   const { user } = useUserContext();
+  const { user } = useUserContext();
 
   return (
     <form
@@ -24,7 +24,7 @@ export default function FormReview({
       onSubmit={(e) => {
         e.preventDefault();
         setLoading("load");
-        addReview(user.token, orderId, comment, files, setLoading);
+        addReview(user.token, orderId, comment, files, setLoading, setProgress);
       }}
     >
       <label className={styles.label}>

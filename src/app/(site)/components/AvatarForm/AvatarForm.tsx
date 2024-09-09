@@ -11,9 +11,14 @@ interface Avatar {
 export function AvatarForm({
   value,
 }: {
-  value: { setLoading: Function; user: { token: string }; setUser: Function };
+  value: {
+    setProgress: Function;
+    setLoading: Function;
+    user: { token: string };
+    setUser: Function;
+  };
 }) {
-  const { setLoading, user, setUser } = value;
+  const { setProgress, setLoading, user, setUser } = value;
   const [avatar, setAvatar] = useState<Avatar>({ file: null, fileUrl: "" });
 
   const { file } = avatar;
@@ -37,7 +42,7 @@ export function AvatarForm({
       onSubmit={(e) => {
         e.preventDefault();
         setLoading("load");
-        changeAvatar(file, setLoading, setUser, user.token);
+        changeAvatar(file, setLoading, setUser, user.token, setProgress);
       }}
     >
       {avatar.fileUrl !== "" && (

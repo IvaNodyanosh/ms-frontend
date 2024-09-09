@@ -1,50 +1,68 @@
+import axios from "axios";
+
 const backendLink = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function changeAvatar(
   avatar: File | null,
   setLoading: Function,
   setUser: Function,
-  token: String
+  token: string,
+  setProgress: Function
 ) {
-  const formData = new FormData();
+  try {
+    setLoading("loading");
 
-  if (avatar) {
-    formData.append("avatar", avatar);
-  }
+    const formData = new FormData();
+    if (avatar) {
+      formData.append("avatar", avatar);
+    }
 
-  console.log(token);
-
-  const data = await fetch(`${backendLink}users/avatars`, {
-    method: "PATCH",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: formData,
-  })
-    .then((res) => {
-      if (!res.ok) {
-        setLoading("error");
-      }
-      return res.json();
-    })
-    .then((data) => data);
-
-  if (data.url) {
-    setUser(
-      (prevState: {
-        name: string;
-        surname: string;
-        statusUser: string;
-        token: string;
-        avatarUrl: string;
-      }) => {
-        return { ...prevState, avatarUrl: data.url };
+    // Використовуємо axios для надсилання PATCH-запиту з відстеженням прогресу
+    const response = await axios.patch(
+      `${backendLink}users/avatars`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data", // Важливо для завантаження файлів
+        },
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.total) {
+            const percentComplete = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setProgress(percentComplete); // Оновлюємо відсоток завантаження
+          }
+        },
       }
     );
-    setLoading("changed-avatar");
 
-    console.log(data);
-  } else {
+    // Обробка відповіді
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      if (data.url) {
+        setUser(
+          (prevState: {
+            name: string;
+            surname: string;
+            statusUser: string;
+            token: string;
+            avatarUrl: string;
+          }) => {
+            return { ...prevState, avatarUrl: data.url };
+          }
+        );
+        setLoading("loading");
+
+        console.log(data);
+      } else {
+        setLoading("error");
+      }
+    } else {
+      setLoading("error");
+    }
+  } catch (error) {
+    console.error("Error:", error);
     setLoading("error");
   }
 }

@@ -13,25 +13,26 @@ import { useState } from "react";
 export default function OrderPage() {
   const [loading, setLoading] = useState<string>("unloaded");
   const { user } = useUserContext();
+  const [progress, setProgress] = useState<number>(0);
 
   switch (loading) {
     case "unloaded":
       return (
         <div className={styles.box}>
-          <FormCreateOrder value={{ setLoading, user }} />
+          <FormCreateOrder value={{ setProgress, setLoading, user }} />
         </div>
       );
 
     case "load":
       return (
         <div className={styles.box}>
-          <Loader />
+          <Loader progress={progress} />
         </div>
       );
     case "loading":
       return (
         <div className={styles.box}>
-          <SuccessMessage type={"add__reviews"} />
+          <SuccessMessage type={"order-create"} />
         </div>
       );
     case "error":
